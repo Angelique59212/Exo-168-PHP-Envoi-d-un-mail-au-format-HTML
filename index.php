@@ -7,10 +7,6 @@
  *    ex: ['j.conan@fondationface.org' => true, 'toto@fondationface.org' => false] => à vous de trouver la suite !
  */
 
-$to = [
-    'j.conan@fondationface.org',
-    ...
-];
 
 $html = '
     <html lang="fr">
@@ -19,9 +15,47 @@ $html = '
         </head>
         <body>
             <div>
-                <!-- Vos actualités ici -->
+                <p>Voici nos programmes de la semaine</p>
+                <table>
+                    <tr>
+                        <th>Jours</th>
+                    </tr>
+                    <tr>
+                        <td>Lundi</td><td>Présentiel</td>
+                    </tr>
+                    <tr>
+                        <td>Mardi</td><td>Présentiel</td>
+                    </tr>
+                    <tr>
+                        <td>Mercredi</td><td>Distanciel</td>
+                    </tr>
+                    <tr>
+                        <td>Jeudi</td><td>Présentiel</td>
+                    </tr>
+                    <tr>
+                        <td>Vendredi</td><td>Distanciel</td>
+                    </tr>
+                </table>
             </div>
         </body>
     </html>
 ';
+
+$to =  'j.conan@fondationface.org , angelique.dehainaut59@gmail.com';
+
+$subject = "Calendrier de présence sur la semaine";
+
+$headers = [
+//    'Reply-to' => 'dehainaut.angelique@orange.fr';
+    'X-Mailer' => 'PHP/' . phpversion(),
+    'Mine-Version' => "1.0",
+    'Content-type' => 'test/html; charset=utf-8'
+];
+
+mail($to, $subject,$html,$headers,"-f dehainaut.angelique@orange.fr");
+if (mail((string)$to, $subject, $html, $headers)) {
+    echo "Email envoyé avec succès à $to ...";
+} else {
+    echo "Échec de l'envoi de l'email...";
+}
 
